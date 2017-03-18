@@ -1,0 +1,17 @@
+import http.client
+
+conn = http.client.HTTPSConnection("api.evasrv.com")
+
+payload = "user_API_token=YOUR-EV-API-TOKEN&role_address=true&bad_address=true&free_email=true&disposable=true&typo_suggest=true&source_file=https%3A%2F%2Fwww.domain.com%2Fmy-mailing-list.csv"
+
+headers = {
+ 'cache-control': "no-cache",
+ 'content-type': "application/x-www-form-urlencoded"
+ }
+
+conn.request("POST", "/batch_process/", payload, headers)
+
+res = conn.getresponse()
+data = res.read()
+
+print(data.decode("utf-8"))
